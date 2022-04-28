@@ -38,11 +38,11 @@ export class App extends Component{
           currentPage: prevState.currentPage + 1,
         }));
     })
-      .catch(error => this.setState({ error })
+      .catch(error => this.setState({ error }))
         .finally(() => {
           this.setState({ isLoading: false });
         })
-    )
+    
   };
 
   onLoadMoreButtonClick = () => {
