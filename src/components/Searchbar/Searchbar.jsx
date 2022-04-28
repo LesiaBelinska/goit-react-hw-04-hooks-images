@@ -1,5 +1,7 @@
 import { Formik, Form, Field } from "formik";
 
+import s from "./Searchbar.module.css";
+
 const initialValues = {
     search: '',
 };
@@ -11,25 +13,28 @@ export const Searchbar = ({ onSubmit }) => {
         resetForm();
     };
 
-        return (
-            <header className="searchbar">
-                 <Formik
+    return (
+        <header className={s.Searchbar}>
+            <Formik
                 initialValues={initialValues}
-            onSubmit={handleSubmit}>
+                onSubmit={handleSubmit}
+                className={s.SearchForm}>
                 {({ isSubmitting }) => (
                     <Form autoComplete="off">
-                    <button type='submit' disabled={isSubmitting}><span className="button-label">Search</span></button>
-                    <Field
-                        type="text"
-                        name="search"
-                    />
-                </Form>
+                        <button className={s.SearchFormButton} type='submit' disabled={isSubmitting}><span className={s.ButtonLabel}>Search</span></button>
+                        <Field
+                            className={s.SearchFormInput}
+                            type="text"
+                            name="search"
+                            placeholder="Search images and photos"
+                        />
+                    </Form>
                 )}
             </Formik>
-           </header>
-        )
+        </header>
+    )
     
-}
+};
 
 
 

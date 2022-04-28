@@ -1,10 +1,10 @@
-import { Rings } from "react-loader-spinner";
+import { Oval } from "react-loader-spinner";
 
 export const Loader = () => {
-    return (<Rings
+    return (<Oval
                     height="500"
                     width="500"
-                    color='red'
+                    color='blue'
                     ariaLabel='loading'
                 />
     )

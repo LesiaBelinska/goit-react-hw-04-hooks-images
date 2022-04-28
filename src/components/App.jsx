@@ -5,7 +5,9 @@ import { ImageGallery } from "./ImageGallery/ImageGallery.jsx";
 import { Button } from "./Button/Button.jsx";
 import { Loader } from "./Loader/Loader.jsx";
 
-import {pixabayFetchImage} from "services/api.js"
+import { pixabayFetchImage } from "services/api.js";
+
+import s from "./App.module.css";
 
 export class App extends Component{
 
@@ -52,7 +54,7 @@ export class App extends Component{
 
   render() {
     return (
-      <div>
+      <div className={s.App}>
         <Searchbar onSubmit={this.handleSearchFormSubmit} />
         {this.state.isLoading &&
           <Loader />}

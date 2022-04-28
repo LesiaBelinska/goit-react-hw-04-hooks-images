@@ -1,8 +1,10 @@
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem.jsx";
 
+import s from "./ImageGallery.module.css";
+
 export const ImageGallery = ({ images }) => {
     return (
-        <ul>
+        <ul className={s.ImageGallery}>
             {images.map(({ id, webformatURL, tags }) => {
                 return (
                     <ImageGalleryItem
