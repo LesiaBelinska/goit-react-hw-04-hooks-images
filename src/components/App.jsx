@@ -31,9 +31,16 @@ export class App extends Component {
 
   fetchImage = () => {
 
+    const { search, currentPage } = this.state;
+
+    if (search.trim() === '') {
+            alert('Enter search query')
+            return;
+        };
+
     this.setState({ isLoading: true });
 
-    pixabayFetchImage(this.state.search, this.state.currentPage)
+    pixabayFetchImage(search, currentPage)
       .then(images => {
         this.setState(prevState => ({
           images: [...prevState.images, ...images],
@@ -64,13 +71,17 @@ export class App extends Component {
 
 
   render() {
+
+    const { error, isLoading, images } = this.state;
+    
     return (
       <div className={s.App}>
         <Searchbar onSubmit={this.handleSearchFormSubmit} />
-        {this.state.isLoading &&
+        {error && <p>No matches found! Try again!</p>}
+        {isLoading &&
           <Loader />}
-        <ImageGallery images={this.state.images} />
-        {this.state.images.length > 11 &&
+        <ImageGallery images={images} />
+        {images.length > 11 &&
           <Button onClick={this.fetchImage} />}
 
       </div>

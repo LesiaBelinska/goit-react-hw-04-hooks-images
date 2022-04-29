@@ -50,7 +50,7 @@ export const Searchbar = ({ onSubmit }) => {
 
 Searchbar.propTypes = {
     onSubmit: PropTypes.func.isRequired,
-}
+};
 
 
 
@@ -87,10 +87,10 @@ Searchbar.propTypes = {
 //     handleSubmit = (event) => {
 //         event.preventDefault();
 
-//         if (this.state.search.trim() === '') {
-//             alert('Enter search query')
-//             return;
-//         };
+        // if (this.state.search.trim() === '') {
+        //     alert('Enter search query')
+        //     return;
+        // };
         
 //         this.props.onSubmit(this.state.search);
 //         this.reset();

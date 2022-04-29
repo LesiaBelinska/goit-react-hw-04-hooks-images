@@ -18,22 +18,26 @@ export class ImageGalleryItem extends Component {
   }
 
     render() {
+
+        const { src, tags, largeImageURL } = this.props;
+        const { showModal } = this.state;
+        
         return (
             <li className={s.ImageGalleryItem}>
                 <img
                     className={s.Image}
-                    src={this.props.src}
-                    alt={this.props.tags}
+                    src={src}
+                    alt={tags}
                     onClick={this.toggleModal}
                 />
-                {this.state.showModal &&
+                {showModal &&
                     <Modal
                         onClose={this.toggleModal}
-                        src={this.props.largeImageURL}
-                        alt={this.props.tags}
+                        src={largeImageURL}
+                        alt={tags}
                     />}
             </li>
-        );
+        )
     }
 };
 

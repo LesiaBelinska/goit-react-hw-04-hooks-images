@@ -6,13 +6,13 @@ export const Button = ({ onClick }) => {
     return (
         <div className={s.ButtonContainer}>
             <button
-            className={s.Button}
-            type="button"
-            onClick={onClick}>
-            Load more</button>
-       </div>
+                className={s.Button}
+                type="button"
+                onClick={onClick}>
+                Load more</button>
+        </div>
     )
-}
+};
 
 Button.propTypes = {
     onClick: PropTypes.func.isRequired,
