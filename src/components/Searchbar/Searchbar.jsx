@@ -1,6 +1,13 @@
 import { Formik, Form, Field } from "formik";
+import * as yup from 'yup';
+import PropTypes from 'prop-types'; 
+import {BsSearch} from "react-icons/bs"
 
 import s from "./Searchbar.module.css";
+
+const schema = yup.object().shape({
+    search: yup.string().required(),
+});
 
 const initialValues = {
     search: '',
@@ -18,23 +25,32 @@ export const Searchbar = ({ onSubmit }) => {
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
-                className={s.SearchForm}>
-                {({ isSubmitting }) => (
-                    <Form autoComplete="off">
-                        <button className={s.SearchFormButton} type='submit' disabled={isSubmitting}><span className={s.ButtonLabel}>Search</span></button>
-                        <Field
-                            className={s.SearchFormInput}
-                            type="text"
-                            name="search"
-                            placeholder="Search images and photos"
-                        />
-                    </Form>
-                )}
+                validationSchema={schema}
+            >
+                <Form
+                    className={s.Form}
+                    autoComplete="off">
+                    <button
+                        className={s.Button}
+                        type='submit'>
+                        <span><BsSearch className={s.Icon} /></span>
+                    </button>
+                    <Field
+                        className={s.Input}
+                        type="text"
+                        name="search"
+                        placeholder="Search images and photos"
+                    />
+                </Form>
             </Formik>
         </header>
     )
     
 };
+
+Searchbar.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+}
 
 
 

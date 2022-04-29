@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem.jsx";
 
 import s from "./ImageGallery.module.css";
@@ -19,6 +21,9 @@ export const ImageGallery = ({ images }) => {
     )
 };
 
+ImageGallery.propTypes = {
+    images: PropTypes.arrayOf(PropTypes.object),
+};
 
 
 

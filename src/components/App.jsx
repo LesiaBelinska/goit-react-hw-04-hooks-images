@@ -41,14 +41,25 @@ export class App extends Component {
         }));
     })
       .catch(error => this.setState({ error }))
-        .finally(() => {
+      .finally(() => {
+        this.onLoadMoreButtonClick();
           this.setState({ isLoading: false });
         })
     
   };
 
   onLoadMoreButtonClick = () => {
-    
+     if (this.state.currentPage > 1) {
+      const options = {
+        top: null,
+        behavior: 'smooth',
+      };
+
+      options.top = window.pageYOffset + document.documentElement.clientHeight;
+      setTimeout(() => {
+        window.scrollTo(options);
+      }, 500);
+    }
   }
 
 
