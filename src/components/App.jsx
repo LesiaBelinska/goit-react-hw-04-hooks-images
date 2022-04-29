@@ -77,7 +77,7 @@ export class App extends Component {
     return (
       <div className={s.App}>
         <Searchbar onSubmit={this.handleSearchFormSubmit} />
-        {error && <p>No matches found! Try again!</p>}
+        {error && <p className={s.Error}>No matches found! Try again!</p>}
         {isLoading &&
           <Loader />}
         <ImageGallery images={images} />
