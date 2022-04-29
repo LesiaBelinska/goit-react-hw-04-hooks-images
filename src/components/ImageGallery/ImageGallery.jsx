@@ -5,12 +5,14 @@ import s from "./ImageGallery.module.css";
 export const ImageGallery = ({ images }) => {
     return (
         <ul className={s.ImageGallery}>
-            {images.map(({ id, webformatURL, tags }) => {
+            {images.map(({ id, webformatURL, tags, largeImageURL }) => {
                 return (
                     <ImageGalleryItem
                         key={id}
                         src={webformatURL}
-                        tags={tags} />
+                        tags={tags}
+                        largeImageURL={largeImageURL}
+                    />
                 )
             })}
         </ul>

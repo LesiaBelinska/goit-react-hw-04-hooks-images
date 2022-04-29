@@ -9,7 +9,7 @@ import { pixabayFetchImage } from "services/api.js";
 
 import s from "./App.module.css";
 
-export class App extends Component{
+export class App extends Component {
 
   state = {
     search: '',
@@ -60,43 +60,9 @@ export class App extends Component{
           <Loader />}
         <ImageGallery images={this.state.images} />
         {this.state.images.length > 11 &&
-        <Button onClick={this.fetchImage}/>}
+          <Button onClick={this.fetchImage} />}
+
       </div>
     )
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-// import { Component } from "react";
-// import { Searchbar } from "./Searchbar/Searchbar.jsx";
-// import { ImageGallery } from "./ImageGallery/ImageGallery.jsx";
-
-// export class App extends Component {
-
-//   state = {
-//     search: '',
-//   };
-
-  // handleSearchFormSubmit = search => {
-  //   this.setState({ search });
-  // }
-
-//   render() {
-//     return (
-//       <div>
-//         <Searchbar onSubmit={this.handleSearchFormSubmit} />
-//         <ImageGallery search={this.state.search}/>
-//         <div></div>
-//       </div>
-//     )
-//   }
-// }
