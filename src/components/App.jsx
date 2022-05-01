@@ -17,6 +17,7 @@ export class App extends Component {
     error: null,
     currentPage: 1,
     isLoading: false,
+    hasMore: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -26,7 +27,7 @@ export class App extends Component {
   }
 
   handleSearchFormSubmit = newSearch => {
-    this.setState({ search: newSearch, images: [], error: null, currentPage: 1, isLoading: false });
+    this.setState({ search: newSearch, images: [], error: null, currentPage: 1});
   }
 
   fetchImage = () => {
@@ -41,10 +42,13 @@ export class App extends Component {
     this.setState({ isLoading: true });
 
     pixabayFetchImage(search, currentPage)
-      .then(images => {
+      .then(({ images, total }) => {
+        const newImages = [...this.state.images, ...images];
+        const hasMore = newImages.length < total;
         this.setState(prevState => ({
-          images: [...prevState.images, ...images],
+          images: newImages,
           currentPage: prevState.currentPage + 1,
+          hasMore,
         }));
     })
       .catch(error => this.setState({ error }))
@@ -72,7 +76,7 @@ export class App extends Component {
 
   render() {
 
-    const { error, isLoading, images } = this.state;
+    const { error, isLoading, images, hasMore } = this.state;
     
     return (
       <div className={s.App}>
@@ -81,7 +85,7 @@ export class App extends Component {
         {isLoading &&
           <Loader />}
         <ImageGallery images={images} />
-        {images.length > 11 &&
+        {hasMore &&
           <Button onClick={this.fetchImage} />}
 
       </div>
