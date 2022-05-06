@@ -16,6 +16,27 @@ export const App = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(false);
+
+  // useEffect(() => {
+
+  //   if (!search) {
+  //     return;
+  //   }
+
+  //   console.log('fetch')
+  //   setIsLoading(true);
+  //   pixabayFetchImage(search, currentPage)
+  //     .then(gallery => {
+  //       setImages(prevState => [...prevState, ...gallery])
+  //     })
+  //     .catch(error => setError(error))
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     })
+    
+  
+  // }, [search, currentPage]);
 
   useEffect(() => {
 
@@ -26,8 +47,12 @@ export const App = () => {
     console.log('fetch')
     setIsLoading(true);
     pixabayFetchImage(search, currentPage)
-      .then(gallery => {
-        setImages(prevState => [...prevState, ...gallery])
+      .then((data) => {
+        const newImages = [...images, ...data.images];
+        const hasMore = newImages.length < data.total;
+        setImages(newImages);
+        setHasMore(hasMore)
+       
       })
       .catch(error => setError(error))
       .finally(() => {
@@ -69,7 +94,9 @@ export const App = () => {
       {isLoading &&
         <Loader />}
       <ImageGallery images={images} />
-      {images.length > 0 && !isLoading &&
+      {/* {images.length > 0 && !isLoading &&
+        <Button onClick={onLoadMoreButtonClick} />} */}
+      {hasMore &&
         <Button onClick={onLoadMoreButtonClick} />}
     </div>
   )
