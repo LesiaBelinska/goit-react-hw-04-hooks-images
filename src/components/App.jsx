@@ -70,20 +70,28 @@ export const App = () => {
     setCurrentPage(1);
   };
 
+  useEffect(() => {
+    if (currentPage > 1) {
+      window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+    }
+  });
 
   const onLoadMoreButtonClick = () => {
     setCurrentPage(prevState => prevState + 1);
-    if (currentPage > 1) {
-      const options = {
-        top: null,
-        behavior: 'smooth',
-      };
+    // if (currentPage > 1) {
+    //   const options = {
+    //     top: null,
+    //     behavior: 'smooth',
+    //   };
 
-      options.top = window.pageYOffset + document.documentElement.clientHeight;
-      setTimeout(() => {
-        window.scrollTo(options);
-      }, 500);
-    }
+    //   options.top = window.pageYOffset + document.documentElement.clientHeight;
+    //   setTimeout(() => {
+    //     window.scrollTo(options);
+    //   }, 500);
+    // }
   };
     
   
