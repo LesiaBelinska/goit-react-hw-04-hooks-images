@@ -16,6 +16,10 @@ const initialValues = {
 export const Searchbar = ({ onSubmit }) => {
     
     const handleSubmit = (values, { resetForm }) => {
+          if (initialValues.search.trim() === '') {
+            alert('Enter search query')
+            return;
+        };
         onSubmit(values.search);
         resetForm();
     };

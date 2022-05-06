@@ -118,10 +118,10 @@ export const App = () => {
 // const fetchImage = () => {
 
 
-  //   if (search.trim() === '') {
-  //           alert('Enter search query')
-  //           return;
-  //       };
+    // if (search.trim() === '') {
+    //         alert('Enter search query')
+    //         return;
+    //     };
 
   //   this.setState({ isLoading: true });
 
