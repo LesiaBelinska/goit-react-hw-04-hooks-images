@@ -39,7 +39,7 @@ export const App = () => {
   // }, [search, currentPage]);
 
   useEffect(() => {
-
+    
     if (!search) {
       return;
     }
@@ -64,7 +64,6 @@ export const App = () => {
 
 
   const handleSearchFormSubmit = newSearch => {
-    
     setSearch(newSearch);
     setImages([]);
     setError(null);
@@ -86,6 +85,8 @@ export const App = () => {
       }, 500);
     }
   };
+    
+  
     
   return (
     <div className={s.App}>
