@@ -16,52 +16,7 @@ export const App = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(false);
-
-  // useEffect(() => {
-
-  //   if (!search) {
-  //     return;
-  //   }
-
-  //   console.log('fetch')
-  //   setIsLoading(true);
-  //   pixabayFetchImage(search, currentPage)
-  //     .then(gallery => {
-  //       setImages(prevState => [...prevState, ...gallery])
-  //     })
-  //     .catch(error => setError(error))
-  //     .finally(() => {
-  //       setIsLoading(false);
-  //     })
-    
-  
-  // }, [search, currentPage]);
-
-  useEffect(() => {
-    
-    if (!search) {
-      return;
-    }
-
-    console.log('fetch')
-    setIsLoading(true);
-    pixabayFetchImage(search, currentPage)
-      .then((data) => {
-        const newImages = [...images, ...data.images];
-        const hasMore = newImages.length < data.total;
-        setImages(newImages);
-        setHasMore(hasMore)
-       
-      })
-      .catch(error => setError(error))
-      .finally(() => {
-        setIsLoading(false);
-      })
-    
-  
-  }, [search, currentPage]);
-
+  const [isVisible, setIsVisible] = useState(0);
 
   const handleSearchFormSubmit = newSearch => {
     setSearch(newSearch);
@@ -69,29 +24,39 @@ export const App = () => {
     setError(null);
     setCurrentPage(1);
   };
+  
+  useEffect(() => {
+
+    if (!search) {
+      return;
+    }
+
+    console.log('fetch')
+    setIsLoading(true);
+    pixabayFetchImage(search, currentPage)
+      .then(images => {
+        setImages(prevState => [...prevState, ...images]);
+        setIsVisible(images.length);
+      })
+      .catch(error => setError(error))
+      .finally(() => {
+        setIsLoading(false);
+      })
+  }, [search, currentPage]);
+
+  
 
   useEffect(() => {
     if (currentPage > 1) {
       window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth',
+      });
     }
   });
 
   const onLoadMoreButtonClick = () => {
     setCurrentPage(prevState => prevState + 1);
-    // if (currentPage > 1) {
-    //   const options = {
-    //     top: null,
-    //     behavior: 'smooth',
-    //   };
-
-    //   options.top = window.pageYOffset + document.documentElement.clientHeight;
-    //   setTimeout(() => {
-    //     window.scrollTo(options);
-    //   }, 500);
-    // }
   };
     
   
@@ -103,9 +68,7 @@ export const App = () => {
       {isLoading &&
         <Loader />}
       <ImageGallery images={images} />
-      {/* {images.length > 0 && !isLoading &&
-        <Button onClick={onLoadMoreButtonClick} />} */}
-      {hasMore &&
+      {isVisible > 0 &&
         <Button onClick={onLoadMoreButtonClick} />}
     </div>
   )
@@ -117,44 +80,13 @@ export const App = () => {
 
 
 
+// with WARNING:
 
-
-
-
-
-
-
-// const fetchImage = () => {
-
-
-    // if (search.trim() === '') {
-    //         alert('Enter search query')
-    //         return;
-    //     };
-
-  //   this.setState({ isLoading: true });
-
-  //   pixabayFetchImage(search, currentPage)
-  //     .then(({ images, total }) => {
-  //       const newImages = [...this.state.images, ...images];
-  //       const hasMore = newImages.length < total;
-  //       this.setState(prevState => ({
-  //         images: newImages,
-  //         currentPage: prevState.currentPage + 1,
-  //         hasMore,
-  //       }));
-  //   })
-  //     .catch(error => this.setState({ error }))
-  //     .finally(() => {
-  //       this.onLoadMoreButtonClick();
-  //         this.setState({ isLoading: false });
-  //       })
-    
-  // };
+  // const [hasMore, setHasMore] = useState(false);
 
 
   // useEffect(() => {
-
+    
   //   if (!search) {
   //     return;
   //   }
